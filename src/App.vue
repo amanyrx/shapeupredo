@@ -87,6 +87,12 @@ function resetForm() {
   newMinutes.value = 15
   errorMessage.value = ''
 }
+function toggleExercise(id) {
+  const exercise = exercises.value.find(item => item.id === id)
+  if (exercise) {
+    exercise.completed = !exercise.completed
+  }
+}
 </script>
 
 <!--<template>-->
@@ -161,9 +167,10 @@ function resetForm() {
         <ExerciseList
             :exercises="exercises"
             :editing="editingId !== null"
-            @edit="startEditing()"
-            @remove="removeExercise()"
+            @edit="startEditing"
+            @remove="removeExercise"
             @toggle="toggleExercise"
+        />
         <button type="button" class="secondary-button"
                 @click="clearCompleted" :disabled="completedCount === 0">
           Clear completed
